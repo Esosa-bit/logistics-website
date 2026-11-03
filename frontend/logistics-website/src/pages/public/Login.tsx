@@ -26,6 +26,10 @@ async function login(data: LoginForm) {
   if (!response.ok) {
     throw new Error(result?.message || 'Unable to log in. Please check your credentials.')
   }
+  <p className="text-center text-sm">
+  New here?{' '}
+  <Link to="/register" className="text-blue-600 hover:underline">Create an account</Link>
+</p>
 
   return result
 }

@@ -5,14 +5,31 @@ import { useMutation } from '@tanstack/react-query'
 import { Link, useSearchParams } from 'react-router-dom'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
-import { resetPassword } from '../../services/api'
 
-// ✏️ YOUR TURN: add a .refine() so confirmPassword must equal password.
-// Hint: the error should appear under the confirmPassword field (use `path`).
-const resetSchema = z.object({
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string().min(1, 'Please confirm your password'),
-})
+async function resetPassword({ token, password }: { token: string; password: string }) {
+  const response = await fetch('/api/reset-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, password }),
+  })
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: 'Failed to reset password' }))
+    throw new Error(error.message || 'Failed to reset password')
+  }
+
+  return response.json()
+}
+
+const resetSchema = z
+  .object({
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  })
 type ResetForm = z.infer<typeof resetSchema>
 
 export default function ResetPassword() {
