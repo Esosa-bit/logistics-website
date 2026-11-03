@@ -5,21 +5,7 @@ import { useMutation } from '@tanstack/react-query'
 import { Link, useSearchParams } from 'react-router-dom'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
-
-async function resetPassword({ token, password }: { token: string; password: string }) {
-  const response = await fetch('/api/reset-password', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ token, password }),
-  })
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: 'Failed to reset password' }))
-    throw new Error(error.message || 'Failed to reset password')
-  }
-
-  return response.json()
-}
+import { resetPassword } from '../../services/api'
 
 const resetSchema = z
   .object({
@@ -33,7 +19,6 @@ const resetSchema = z
 type ResetForm = z.infer<typeof resetSchema>
 
 export default function ResetPassword() {
-  // Reads ?token=... from the URL
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
 
@@ -48,7 +33,6 @@ export default function ResetPassword() {
       resetPassword({ token: token ?? '', password: data.password }),
   })
 
-  // No token in the URL: nothing to reset
   if (!token) {
     return (
       <section className="mx-auto max-w-md px-4 py-12 text-center">

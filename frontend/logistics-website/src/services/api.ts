@@ -33,3 +33,9 @@ export async function registerUser(payload: RegisterPayload) {
     throw new Error('Could not create the account. Try a different email or log in.')
   }
 }
+export async function resetPassword(payload: { token: string; password: string }) {
+  await wait(800)
+  if (payload.token === 'expired') {
+    throw new Error('This reset link is invalid or has expired')
+  }
+}
