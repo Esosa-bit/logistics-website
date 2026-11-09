@@ -18,6 +18,9 @@ export default function Button({
                  focus-visible:outline-blue-600 disabled:cursor-not-allowed disabled:opacity-60"
       {...rest}
     >
+      <button className="rounded-lg bg-brand-orange px-4 py-2 font-semibold text-white hover:bg-brand-orange-dark">
+        
+      </button>
       {loading ? 'Please wait...' : children}
     </button>
   )

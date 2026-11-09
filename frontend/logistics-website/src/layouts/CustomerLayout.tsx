@@ -16,25 +16,27 @@ export default function CustomerLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3">
+      <header className="flex items-center justify-between border-b-4 border-brand-orange bg-navy px-4 py-3 text-white">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-label="Toggle menu"
-            className="rounded-lg border border-gray-300 px-2 py-1 md:hidden"
+            className="rounded-lg border border-white px-2 py-1 text-white md:hidden"
           >
             ☰
           </button>
-          <span className="text-xl font-bold text-blue-600">LogiTrack</span>
+          <span className="text-xl font-bold text-white">
+            Logi<span className="text-brand-orange">Track</span>
+          </span>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="hidden text-gray-600 sm:inline">{user?.name}</span>
+          <span className="hidden text-white sm:inline">{user?.name}</span>
           <button
             type="button"
             onClick={() => setUser(null)} // later: also call the backend to clear the cookie
-            className="rounded-lg border border-gray-300 px-3 py-1.5 hover:bg-gray-50"
+            className="rounded-lg bg-brand-orange px-3 py-1.5 font-semibold text-white hover:bg-brand-orange-dark"
           >
             Log out
           </button>
@@ -44,12 +46,12 @@ export default function CustomerLayout() {
       <div className="flex flex-1">
         {/* Hidden on phones until the ☰ button opens it; always visible from md up */}
         <aside
-          className={`${menuOpen ? 'block' : 'hidden'} w-56 shrink-0 border-r border-gray-200 bg-white md:block`}
+          className={`${menuOpen ? 'block' : 'hidden'} w-56 shrink-0 border-r-4 border-brand-orange bg-navy text-white md:block`}
         >
           <Sidebar links={customerLinks} onNavigate={() => setMenuOpen(false)} />
         </aside>
 
-        <main className="flex-1 bg-gray-50 p-4 md:p-8">
+        <main className="flex-1 bg-white p-4 text-navy md:p-8">
           <Outlet />
         </main>
       </div>
