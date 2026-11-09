@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* Design tokens. Tailwind v4 reads these and creates classes such as
+   bg-navy-900, text-ink-600, font-heading automatically. */
+@theme {
+  --color-navy-900: #0b2545;
+  --color-navy-700: #13407a;
+  --color-navy-100: #dfe7f2;
+
+  --color-orange-500: #e8661a; /* live-position marker only */
+  --color-orange-600: #c2410c; /* buttons: passes contrast with white text */
+  --color-orange-700: #9a3412; /* button hover */
+
+  --color-ink-50: #f4f6f9;
+  --color-ink-200: #d5dbe3;
+  --color-ink-600: #4a5568;
+
+  --color-success-700: #1e7b4a;
+  --color-danger-700: #b42318;
+
+  --font-sans: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ink-50);
+    color: var(--color-ink-600);
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums; /* digits line up in tracking numbers */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-navy-900);
+    font-family: var(--font-heading);
+    line-height: 1.2;
+  }
+
+  /* Visible keyboard focus on everything */
+  :focus-visible {
+    outline: 3px solid var(--color-navy-700);
+    outline-offset: 2px;
+  }
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
