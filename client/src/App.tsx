@@ -11,6 +11,9 @@ import Profile from "./pages/admin/Profile";
 import Notifications from "./pages/admin/Notifications";
 import Settings from "./pages/admin/Settings";
 import HelpSupport from "./pages/admin/HelpSupport";
+import CustomerLayout from "./layouts/CustomerLayout";
+import MyShipmentsPage from "./pages/customer/MyShipmentsPage";
+import CustomerProviders from "./customer/CustomerProviders";
 
 export default function App() {
   return (
@@ -29,6 +32,19 @@ export default function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="support" element={<HelpSupport />} />
         </Route>
+      </Route>
+
+      {/* TODO: protect customer routes once customer login exists */}
+      <Route
+        path="/customer"
+        element={
+          <CustomerProviders>
+            <CustomerLayout />
+          </CustomerProviders>
+        }
+      >
+        <Route index element={<Navigate to="shipments" replace />} />
+        <Route path="shipments" element={<MyShipmentsPage />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
