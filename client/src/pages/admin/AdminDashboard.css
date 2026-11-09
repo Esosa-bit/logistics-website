@@ -1,0 +1,184 @@
+.dash {
+  padding: 28px;
+}
+
+.dash-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #0b1f4d;
+}
+
+.dash-sub {
+  margin: 6px 0 10px;
+  color: #374151;
+}
+
+.dash-underline {
+  width: 90px;
+  height: 4px;
+  border-radius: 2px;
+  background: #f97316;
+  margin-bottom: 24px;
+}
+
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(11, 31, 77, 0.08);
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.stat-icon.navy {
+  background: #0b1f4d;
+}
+
+.stat-icon.orange {
+  background: #f97316;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0b1f4d;
+  line-height: 1;
+}
+
+.stat-label {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(11, 31, 77, 0.08);
+  overflow: hidden;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #0b1f4d;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.panel-link {
+  color: #f97316;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.dash-table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+}
+
+.dash-table th {
+  text-align: left;
+  padding: 12px 18px;
+  background: #e8edf7;
+  color: #0b1f4d;
+  font-size: 14px;
+}
+
+.dash-table td {
+  padding: 14px 18px;
+  border-top: 1px solid #eef0f4;
+  font-size: 15px;
+}
+
+.dash-table a {
+  color: #0b1f4d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.panel-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn.navy {
+  background: #0b1f4d;
+}
+
+.btn.orange {
+  background: #f97316;
+}
+
+@media (max-width: 900px) {
+  .dash-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash {
+    padding: 16px;
+  }
+
+  .dash-title {
+    font-size: 24px;
+  }
+}
