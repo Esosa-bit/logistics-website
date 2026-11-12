@@ -10,7 +10,10 @@ const MOCK_USERS: { email: string; user: User }[] = [
   { email: 'admin@example.com', user: { id: 2, name: 'Test Admin', role: 'admin' } },
   { email: 'rider@example.com', user: { id: 3, name: 'Test Rider', role: 'rider' } },
 ]
-
+// MOCK: replace with a real POST /api/auth/forgot-password
+export async function requestPasswordReset(_email: string) {
+  await wait(800)
+}
 // MOCK: replace with a real POST /api/auth/login (credentials: 'include')
 export async function login(payload: LoginPayload) {
   await wait(800)

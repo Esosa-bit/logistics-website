@@ -3,93 +3,97 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useMutation } from '@tanstack/react-query'
 import { Link, useNavigate } from 'react-router-dom'
-import InputField from '../../components/InputField'
-import Button from '../../components/Button'
+import { PageContainer } from '../../components/layout/PageContainer'
+import { AlertMessage } from '../../components/ui/AlertMessage'
+import { Button } from '../../components/ui/button'
+import { FormField } from '../../components/ui/FormField'
+import { PasswordField } from '../../components/ui/PasswordField'
+import { useAuth } from '../../context/useAuth'
+import { HOME_BY_ROLE } from '../../context/auth-context'
+import { login } from '../../services/api'
+import { ROUTES } from '../../lib/routes'
 
-// The rules
 const loginSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Enter a valid email address'),
+  email: z.string().trim().min(1, 'Enter your email address.').email('Enter a valid email address.'),
   // Only "required" here. Strength rules belong on the Register page.
-  password: z.string().min(1, 'Password is required'),
+  password: z.string().min(1, 'Enter your password.'),
 })
 
 type LoginForm = z.infer<typeof loginSchema>
 
-async function login(data: LoginForm) {
-  const response = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  })
-
-  const result = await response.json().catch(() => null)
-  if (!response.ok) {
-    throw new Error(result?.message || 'Unable to log in. Please check your credentials.')
-  }
-  <p className="text-center text-sm">
-  New here?{' '}
-  <Link to="/register" className="text-blue-600 hover:underline">Create an account</Link>
-</p>
-
-  return result
-}
-
 export default function Login() {
   const navigate = useNavigate()
+  const { setUser } = useAuth()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginForm>({ resolver: zodResolver(loginSchema) })
+  } = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: '', password: '' },
+  })
 
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess: () => navigate('/'), // later: send each role to its own dashboard
+    onSuccess: ({ user }) => {
+      setUser(user)
+      navigate(HOME_BY_ROLE[user.role], { replace: true }) // customer, admin or rider dashboard
+    },
   })
 
   return (
-    <section className="mx-auto max-w-md px-4 py-12">
-      <h1 className="mb-6 text-center text-2xl font-bold">Welcome back</h1>
+    <PageContainer>
+      <div className="mx-auto max-w-md">
+        <h1 className="text-center text-3xl font-semibold">Welcome back</h1>
+        <p className="mt-2 text-center">Log in to book deliveries and track your shipments.</p>
 
-      <form
-        onSubmit={handleSubmit((data) => mutation.mutate(data))}
-        noValidate
-        className="space-y-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
-      >
-        <InputField
-          id="email"
-          label="Email"
-          type="email"
-          autoComplete="email"
-          error={errors.email?.message}
-          {...register('email')}
-        />
-        <InputField
-          id="password"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          error={errors.password?.message}
-          {...register('password')}
-        />
+        <form
+          onSubmit={handleSubmit((data) => mutation.mutate(data))}
+          noValidate
+          className="mt-8 space-y-5 rounded-xl border border-ink-200 bg-white p-6 shadow-sm"
+        >
+          <FormField
+            label="Email address"
+            type="email"
+            autoComplete="email"
+            error={errors.email?.message}
+            {...register('email')}
+          />
+          <PasswordField
+            label="Password"
+            autoComplete="current-password"
+            error={errors.password?.message}
+            {...register('password')}
+          />
 
-        {mutation.isError && (
-          <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
-            {mutation.error.message}
+          {mutation.isError && (
+            <AlertMessage variant="error" title="Could not log in">
+              {mutation.error.message}
+            </AlertMessage>
+          )}
+
+          <Button type="submit" loading={mutation.isPending} className="w-full">
+            {mutation.isPending ? 'Logging in…' : 'Log in'}
+          </Button>
+
+          <p className="text-center text-sm">
+            <Link to={ROUTES.forgotPassword} className="font-medium text-navy-700 underline hover:text-navy-900">
+              Forgot password?
+            </Link>
           </p>
-        )}
+          <p className="text-center text-sm">
+            New here?{' '}
+            <Link to={ROUTES.register} className="font-medium text-navy-700 underline hover:text-navy-900">
+              Create an account
+            </Link>
+          </p>
+        </form>
 
-        <Button type="submit" loading={mutation.isPending}>
-          Log in
-        </Button>
-
-        <p className="text-center text-sm">
-          <Link to="/forgot-password" className="text-blue-600 hover:underline">
-            Forgot password?
-          </Link>
+        <p className="mt-4 text-center text-xs">
+          Demo accounts: test@example.com, admin@example.com, rider@example.com (password: password123)
         </p>
-      </form>
-    </section>
+      </div>
+    </PageContainer>
   )
 }

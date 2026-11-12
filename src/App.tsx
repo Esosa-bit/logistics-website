@@ -1,9 +1,9 @@
 
 import { Route, Routes } from 'react-router-dom'
 
-import PublicLayout from './layouts/PublicLayout'
 import CustomerLayout from './layouts/CustomerLayout'
 import ProtectedRoute from './components/ProtectedRoute'
+import PublicLayout from './layouts/PublicLayout'
 
 import Home from './pages/public/Home'
 import AboutUs from './pages/public/AboutUs'
@@ -43,39 +43,38 @@ export default function App() {
         <Route path={ROUTES.services} element={<Services />} />
       </Route>
 
-      {/* Public authentication pages */}
-      <Route element={<PublicLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-      </Route>
+      
+  {/* Authentication pages now use the same layout */}
+  <Route path={ROUTES.login} element={<Login />} />
+  <Route path={ROUTES.register} element={<Register />} />
+  <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
+  <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
+</Route>
 
       {/* Customer pages */}
       <Route element={<ProtectedRoute allow={['customer']} />}>
         <Route element={<CustomerLayout />}>
-          <Route path="/customer/dashboard" element={<CustomerDashboard />} />
-          <Route path="/customer/book" element={<BookDelivery />} />
-          <Route path="/book-delivery" element={<BookDelivery />} />
-          <Route path="/customer/shipments" element={<MyShipments />} />
-          <Route path="/customer/shipments/:id" element={<ShipmentDetails />} />
-          <Route path="/customer/payments" element={<MyPayments />} />
-          <Route path="/customer/profile" element={<MyProfile />} />
+          <Route path={ROUTES.customerDashboard} element={<CustomerDashboard />} />
+          <Route path={ROUTES.bookDelivery} element={<BookDelivery />} />
+          <Route path={ROUTES.myShipments} element={<MyShipments />} />
+          <Route path={ROUTES.shipmentDetails} element={<ShipmentDetails />} />
+          <Route path={ROUTES.myPayments} element={<MyPayments />} />
+          <Route path={ROUTES.myProfile} element={<MyProfile />} />
         </Route>
       </Route>
 
       {/* Admin dashboard */}
       <Route element={<ProtectedRoute allow={['admin']} />}>
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path={ROUTES.adminDashboard} element={<AdminDashboard />} />
       </Route>
 
       {/* Rider dashboard */}
       <Route element={<ProtectedRoute allow={['rider']} />}>
-        <Route path="/rider/dashboard" element={<RiderDashboard />} />
+        <Route path={ROUTES.riderDashboard} element={<RiderDashboard />} />
       </Route>
 
       {/* Fallback for pages not yet implemented */}
-      <Route path="/team-login" element={<TeammatePlaceholder pageName="Log in" />} />
+      <Route path={ROUTES.teamLogin} element={<TeammatePlaceholder pageName="Log in" />} />
 
       {/* 404 page */}
       <Route path="*" element={<NotFound />} />
