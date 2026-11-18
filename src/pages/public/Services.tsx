@@ -76,7 +76,7 @@ export default function Services() {
             What We Do
           </p>
 
-          <h1 className="mt-4 text-4xl font-extrabold md:text-6xl">
+          <h1 className="mt-4 text-4xl font-extrabold md:text-6xl text-white">
             Our Logistics Services
           </h1>
 

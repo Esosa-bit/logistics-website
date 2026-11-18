@@ -57,7 +57,7 @@ export default function Register() {
           error={errors.confirmPassword?.message} {...register('confirmPassword')} />
 
         {mutation.isError && (
-          <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+          <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-navy-700">
             {mutation.error.message}
           </p>
         )}
