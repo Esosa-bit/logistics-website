@@ -55,7 +55,7 @@ export default function About() {
             About Our Company
           </p>
 
-          <h1 className="mt-4 max-w-3xl text-4xl font-extrabold md:text-6xl">
+          <h1 className="mt-4 max-w-3xl text-4xl font-extrabold md:text-6xl text-white">
             VISIONARY LOGISTICS
           </h1>
 
@@ -101,7 +101,7 @@ export default function About() {
           <img
             src="/images/visionary-logistics.png"
             alt="Visionary Logistics warehouse, delivery vehicles and team"
-            className="h-[320px] w-full object-cover md:h-[420px]"
+            className="h-320px w-full object-cover md:h-420px"
           />
         </div>
       </section>
@@ -206,7 +206,7 @@ export default function About() {
               What Guides Us
             </p>
 
-            <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold md:text-4xl text-white">
               Our Core Values
             </h2>
           </div>
@@ -222,7 +222,7 @@ export default function About() {
                 >
                   <Icon size={32} className="text-orange-400" />
 
-                  <h3 className="mt-5 text-xl font-bold">
+                  <h3 className="mt-5 text-xl font-bold text-white">
                     {value.title}
                   </h3>
 

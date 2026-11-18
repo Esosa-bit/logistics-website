@@ -38,7 +38,7 @@ function Home() {
   return (
     <main className="w-full overflow-hidden">
       {/* HERO SECTION */}
-      <section className="relative flex min-h-[550px] items-center justify-center bg-blue-950">
+      <section className="relative flex min-h-550px items-center justify-center bg-blue-950">
 
         <img
           src="/images/visionary-logistics.png"
@@ -53,7 +53,7 @@ function Home() {
             Delivering Across the Globe
           </p>
 
-          <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-6xl">
+          <h1 className="mb-6 text-4xl font-extrabold leading-tight text-white md:text-6xl">
             VISIONARY LOGISTICS
           </h1>
 
@@ -186,7 +186,7 @@ function Home() {
           </div>
 
           <div className="rounded-xl bg-blue-950 p-10 text-white">
-            <h3 className="mb-5 text-2xl font-bold">
+            <h3 className="mb-5 text-2xl font-bold text-white">
               Delivering With Excellence
             </h3>
 

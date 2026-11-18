@@ -20,6 +20,7 @@ export const ROUTES = {
   myShipments: "/customer/Myshipments",
   myPayments: "/customer/payments",
   myProfile: "/customer/profile",
+  
 } as const;
 
 

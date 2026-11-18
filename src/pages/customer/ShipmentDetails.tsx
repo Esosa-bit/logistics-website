@@ -200,7 +200,7 @@ function TrackingTimeline({ events }: { events: TrackingEvent[] }) {
         <li key={event.id} className="mb-8 last:mb-0">
           {/* The dot on the line; the latest update is highlighted */}
           <span
-            className={`absolute -left-[9px] mt-1 h-4 w-4 rounded-full border-2 border-white ${
+            className={`absolute -left-9px mt-1 h-4 w-4 rounded-full border-2 border-white ${
               index === 0 ? "bg-blue-600" : "bg-gray-300"
             }`}
             aria-hidden="true"

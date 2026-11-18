@@ -14,7 +14,7 @@ import { login } from '../../services/api'
 import { ROUTES } from '../../lib/routes'
 
 const loginSchema = z.object({
-  userType: z.enum(['customer', 'admin']),
+    userType: z.enum(['customer', 'admin', 'rider']),
   email: z
     .string()
     .trim()
@@ -95,6 +95,7 @@ export default function Login() {
             >
               <option value="customer">Customer</option>
               <option value="admin">Admin</option>
+                            <option value="rider">Rider</option>
             </select>
 
             {errors.userType && (

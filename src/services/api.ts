@@ -10,9 +10,20 @@ const MOCK_USERS: { email: string; user: User }[] = [
   { email: 'admin@example.com', user: { id: 2, name: 'Test Admin', role: 'admin' } },
   { email: 'rider@example.com', user: { id: 3, name: 'Test Rider', role: 'rider' } },
 ]
-// MOCK: replace with a real POST /api/auth/forgot-password
-export async function requestPasswordReset(_email: string) {
-  await wait(800)
+export async function requestPasswordReset(email: string) {
+  const response = await fetch('/api/auth/forgot-password', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to request password reset');
+  }
+
+  return response.json();
 }
 // MOCK: replace with a real POST /api/auth/login (credentials: 'include')
 export async function login(payload: LoginPayload) {
