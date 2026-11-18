@@ -25,6 +25,10 @@ import ContactUs from './pages/ContactUs'
 import NotFound from './pages/NotFound'
 import TrackShipment from './pages/TrackShipment'
 
+import UpdateShipmentStatus from './pages/admin/UpdateShipmentStatus'
+import ManageCustomers from './pages/admin/ManageCustomers'
+import ManageRiders from './pages/admin/ManageRiders'
+
 import { RootLayout } from './components/layout/RootLayout'
 import { ROUTES } from './lib/routes'
 
@@ -69,12 +73,16 @@ export default function App() {
         </Route>
       </Route>
 
+      
       {/* Admin dashboard */}
       <Route element={<ProtectedRoute allow={['admin']} />}>
         <Route
           path={ROUTES.adminDashboard}
           element={<AdminDashboard />}
         />
+         <Route path={ROUTES.adminUpdateShipmentStatus} element={<UpdateShipmentStatus />} />
+  <Route path={ROUTES.adminCustomers} element={<ManageCustomers />} />
+  <Route path={ROUTES.adminRiders} element={<ManageRiders />} />
       </Route>
 
       {/* Rider dashboard */}
@@ -84,8 +92,6 @@ export default function App() {
           element={<RiderDashboard />}
         />
       </Route>
-
-    
 
       {/* 404 page */}
       <Route path="*" element={<NotFound />} />

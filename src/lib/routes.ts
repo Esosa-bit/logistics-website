@@ -1,4 +1,3 @@
-
 // ONE place for every route path. Never type '/track' by hand elsewhere.
 export const ROUTES = {
   home: "/",
@@ -20,8 +19,10 @@ export const ROUTES = {
   myShipments: "/customer/Myshipments",
   myPayments: "/customer/payments",
   myProfile: "/customer/profile",
+  adminUpdateShipmentStatus: "/admin/shipments/status",
+  adminCustomers: "/admin/customers",
+  adminRiders: "/admin/riders",
 } as const;
-
 
 export const NAV_LINKS = [
   { label: "Home", to: ROUTES.home },

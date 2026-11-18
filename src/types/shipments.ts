@@ -28,3 +28,32 @@ export type PublicShipment = {
 export type TrackingResult =
   | { kind: "found"; shipment: PublicShipment }
   | { kind: "not_found" };
+
+export interface Shipment {
+  id: string;
+  trackingNumber: string;
+  customerName: string;
+  origin: string;
+  destination: string;
+  status: ShipmentStatus;
+  riderName?: string;
+  createdAt: string;
+  history: TrackingEvent[]; // newest first
+}
+
+// Used by Manage Customers and Manage Riders
+export interface Customer {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  status: "active" | "suspended";
+  createdAt: string;
+}
+
+export interface Rider {
+  id: string;
+  fullName: string;
+  phone: string;
+  status: "active" | "inactive";
+}
