@@ -161,10 +161,10 @@ export default function Login() {
           </p>
         </form>
 
-        <p className="mt-4 text-center text-xs">
+        {/* <p className="mt-4 text-center text-xs">
           Demo accounts: Customer — test@example.com; Admin —
           admin@example.com (password: password123)
-        </p>
+        </p> */}
       </div>
     </PageContainer>
   )

@@ -56,7 +56,7 @@ export default function TrackShipment() {
           label="Tracking number"
           placeholder="VL-2026-00125"
           autoComplete="off"
-          hint="Demo: try VL-2026-00125. Try VL-ERROR to see the error message."
+          // hint="Demo: try VL-2026-00125. Try VL-ERROR to see the error message."
           error={errors.trackingNumber?.message}
           {...register('trackingNumber')}
         />
